@@ -24,6 +24,7 @@ import { HttpModule } from '@angular/http';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { RestangularConfigFactory } from './shared/restconfig';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 
@@ -37,7 +38,8 @@ import { RestangularConfigFactory } from './shared/restconfig';
     AboutComponent,
     ContactComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
