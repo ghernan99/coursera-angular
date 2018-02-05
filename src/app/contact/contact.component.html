@@ -37,10 +37,50 @@
       </div>
 
       <div fxFlex fxFlexOffset="20px" class="form-size">
-        <h3>Send us your Feedback</h3>
-        <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+        <h3>Send us your Feedback</h3>   
 
-        <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+        <div [hidden]="resultFeedback || feedbackErrMess || visibility == 'shown'">
+          <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+        </div> 
+
+        <div *ngIf="feedbackErrMess">
+          <h2>Error</h2>
+          <h4>{{feedbackErrMess}}</h4>
+        </div>                 
+
+        <md-card *ngIf="resultFeedback">
+          <md-card-header>
+            <md-card-title>
+            <h2>Your Submission</h2>
+            </md-card-title>
+          </md-card-header>
+          <md-card-content>                                     
+                <p md-line>
+                  <span>First Name: {{resultFeedback.firstname}}</span>
+                </p>       
+                <p md-line>
+                  <span>Last Name: {{resultFeedback.lastname}}</span>
+                </p>
+                <p md-line>
+                  <span>Tel. Number: {{resultFeedback.telnum}}</span>
+                </p>
+                <p md-line>
+                  <span>Email: {{resultFeedback.email}}</span>
+                </p>
+                <p md-line>
+                  <span>Contact You?: {{resultFeedback.agree}}</span>
+                </p>     
+                <p md-line>
+                  <span>How?: {{resultFeedback.contacttype}}</span>
+                </p>     
+                <p md-line>
+                  <span>Feedback: {{resultFeedback.message}}</span>
+                </p> 
+          </md-card-content>
+        </md-card> 
+
+
+        <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" [@visibility] ='visibility' [@expand]>
           <p>
             <md-input-container class="half-width"
              dividerColor="{{(formErrors.firstname) ? 'warn' : 'primary'}}">
@@ -95,6 +135,6 @@
             </md-input-container>
           </p>
           <button type="submit" md-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
-        </form>
-      </div>
+        </form>        
+      </div>             
 </div>
